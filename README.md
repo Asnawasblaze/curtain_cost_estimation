@@ -15,9 +15,7 @@ Backend: (Add if used, e.g., PHP, Node.js)
 Platform: WordPress (if integrated)
 
 📂 Repository Structure:
-📁 /assets – Stylesheets & images
-📁 /scripts – JavaScript logic for calculations
-📄 index.html – Main UI
+📄 index.html – Main UI, – Stylesheets & images, – JavaScript logic for calculations
 
 This project was built as a freelance assignment for a foreign client, focusing on accuracy, simplicity, and efficiency.
 
