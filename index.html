@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Estimate Calculator</title>
+    <style>
+        :root {
+            --primary-color: #854c7e;
+            --hover-color: #6e3e67;
+            --border-color: #854c7e;
+            --glow-color: rgba(133, 76, 126, 0.8);
+            --text-color: #585a5c;
+            --background-color: #f5f5f5;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .pec-container {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .pec-left-image {
+            flex: 1;
+            background-image: url('https://checkpriceuae.com/wp-content/uploads/2024/10/sheerside.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .pec-calculator {
+            flex: 1;
+            padding: 40px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .pec-styles-options {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .pec-style-option {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .pec-style-option img {
+            width: 100%;
+            height: auto;
+            max-width: 100px;
+            border-radius: 10px;
+            border: 5px solid transparent;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease, border-color 0.3s;
+        }
+
+        /* Glow effect on hover */
+        .pec-style-option img:hover {
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        /* Glow effect on selection */
+        .pec-style-option img.pec-selected {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .pec-style-option button {
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            color: white;
+            margin-top: 5px;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pec-style-option button:hover {
+            background-color: var(--hover-color);
+        }
+
+        .pec-input-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .pec-input-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .pec-input-group label {
+            color: var(--text-color);
+            margin-bottom: 5px;
+        }
+
+        .pec-input-group input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        .pec-input-group input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .pec-estimate {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .pec-btn-calculate {
+            border: 2px solid var(--border-color);
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            background-color: white;
+            color: var(--border-color);
+        }
+
+        .pec-btn-calculate:hover {
+            background-color: var(--hover-color);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .pec-container {
+                flex-direction: column;
+                height: 100vh;
+            }
+
+            .pec-left-image {
+                height: 40%;
+            }
+
+            .pec-calculator {
+                padding: 20px;
+            }
+
+            .pec-input-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .pec-style-option button {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .pec-btn-calculate {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pec-container">
+        <div class="pec-left-image"></div>
+
+        <div class="pec-calculator">
+            <h2>Get Estimate</h2>
+
+            <div class="pec-styles-options">
+                <div class="pec-style-option">
+                    <img id="pec-sheersImage" src="https://checkpriceuae.com/wp-content/uploads/2024/10/sheer.png" alt="Sheers" onclick="selectStyle('sheers')">
+                    <button onclick="selectStyle('sheers')">Sheers</button>
+                </div>
+                <div class="pec-style-option">
+                    <img id="pec-curtainsImage" src="https://checkpriceuae.com/wp-content/uploads/2024/10/curtain.png" alt="Curtains" onclick="selectStyle('curtains')">
+                    <button onclick="selectStyle('curtains')">Curtains</button>
+                </div>
+                <div class="pec-style-option">
+                    <img id="pec-rollerImage" src="https://checkpriceuae.com/wp-content/uploads/2024/10/roller.png" alt="Roller Blinds" onclick="selectStyle('roller')">
+                    <button onclick="selectStyle('roller')">Roller Blinds</button>
+                </div>
+            </div>
+
+            <div class="pec-input-container">
+                <div class="pec-input-group">
+                    <label for="pec-width">Width</label>
+                    <input type="number" id="pec-width" placeholder="Width in cm">
+                </div>
+                <div class="pec-input-group">
+                    <label for="pec-height">Height</label>
+                    <input type="number" id="pec-height" placeholder="Height in cm">
+                </div>
+            </div>
+
+            <div class="pec-estimate" id="pec-estimate">Estimate AED 0</div>
+            <button class="pec-btn-calculate" onclick="calculateEstimate()">Calculate</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedStyle = 'sheers';
+        const rates = { sheers: 15, curtains: 32, roller: 120 };
+
+        function selectStyle(style) {
+            selectedStyle = style;
+            document.querySelectorAll('.pec-style-option img').forEach(img => {
+                img.classList.remove('pec-selected');
+            });
+            document.getElementById(`pec-${style}Image`).classList.add('pec-selected');
+            calculateEstimate(); // Recalculate automatically on selection
+        }
+
+        function calculateEstimate() {
+            const width = +document.getElementById('pec-width').value || 0;
+            const height = +document.getElementById('pec-height').value || 0;
+            const estimate = (width * height * rates[selectedStyle]) / 10000;
+            document.getElementById('pec-estimate').textContent = `Estimate AED ${estimate.toFixed(2)}`;
+        }
+    </script>
+
+</body>
+</html>
